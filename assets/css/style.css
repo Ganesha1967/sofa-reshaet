@@ -1,0 +1,119 @@
+/* ===== BASE ===== */
+html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: "Montserrat", sans-serif;
+    overflow-x: hidden;
+    min-width: 320px;
+    -webkit-tap-highlight-color: transparent;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* ===== COLORS ===== */
+.bg-accent {
+    background-color: #8668DE;
+}
+
+.text-accent {
+    color: #8668DE;
+}
+
+.border-accent {
+    border-color: #8668DE;
+}
+
+/* ===== HERO ===== */
+.hero-gradient {
+    background: radial-gradient(circle at 70% 50%, #f7f5ff 0%, #ffffff 100%);
+}
+
+/* ===== MOBILE MENU ===== */
+#mobile-menu {
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    transform: translateY(-20px);
+    opacity: 0;
+    pointer-events: none;
+}
+
+#mobile-menu.active {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* ===== SCROLLBARS ===== */
+::-webkit-scrollbar {
+    display: none;
+}
+
+.process-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: #8668de transparent;
+}
+
+.process-scroll::-webkit-scrollbar {
+    height: 6px;
+}
+
+.process-scroll::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 10px;
+}
+
+.process-scroll::-webkit-scrollbar-thumb {
+    background-color: #8668de;
+    border-radius: 10px;
+}
+
+.custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: #8668de #f1f5f9;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+    height: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 20px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #8668de;
+    border-radius: 20px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #6d4fc2;
+}
+
+/* ===== MOBILE FIXES ===== */
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    html {
+        font-size: 18px;
+    }
+}
+
+@media (min-width: 768px) {
+    p {
+        line-height: 1.6 !important;
+    }
+
+    .mobile-link {
+        font-size: 1.1rem;
+    }
+}
