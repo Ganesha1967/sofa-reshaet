@@ -1,7 +1,17 @@
+/* ===== VARIABLES & ROOT ===== */
+
+:root {
+    --accent: #8b5cf6;
+    --accent-hover: #7c3aed;
+    --accent-soft: rgba(139, 92, 246, 0.1);
+    --slate-text: #64748b;
+    --bg-light: #f1f5f9;
+}
+
 /* ===== BASE ===== */
+
 html {
     scroll-behavior: smooth;
-    overflow-x: hidden;
 }
 
 body {
@@ -9,10 +19,13 @@ body {
     overflow-x: hidden;
     min-width: 320px;
     -webkit-tap-highlight-color: transparent;
+    color: #1e293b;
 }
 
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 img {
@@ -21,99 +34,167 @@ img {
     display: block;
 }
 
-/* ===== COLORS ===== */
-.bg-accent {
-    background-color: #8668DE;
-}
+/* ===== UTILITIES ===== */
 
-.text-accent {
-    color: #8668DE;
-}
-
-.border-accent {
-    border-color: #8668DE;
-}
+.bg-accent { background-color: var(--accent); }
+.text-accent { color: var(--accent); }
+.border-accent { border-color: var(--accent); }
 
 /* ===== HERO ===== */
+
 .hero-gradient {
     background: radial-gradient(circle at 70% 50%, #f7f5ff 0%, #ffffff 100%);
 }
 
 /* ===== MOBILE MENU ===== */
+
 #mobile-menu {
-    transition: transform 0.3s ease, opacity 0.3s ease;
-    transform: translateY(-20px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateY(-10px);
     opacity: 0;
-    pointer-events: none;
+    visibility: hidden;
+    position: fixed;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    z-index: 50;
 }
 
 #mobile-menu.active {
     transform: translateY(0);
     opacity: 1;
-    pointer-events: auto;
+    visibility: visible;
 }
 
-/* ===== SCROLLBARS ===== */
-::-webkit-scrollbar {
+/* ===== TABS SYSTEM ===== */
+
+.tab-btn {
+    transition: all 0.2s ease-in-out;
+}
+
+.active-tab {
+    background-color: var(--accent);
+    color: white;
+    border-color: var(--accent);
+    box-shadow: 0 10px 25px -5px rgba(139, 92, 246, 0.3);
+}
+
+.inactive-tab {
+    background-color: white;
+    color: var(--slate-text);
+    border-color: #f1f5f9;
+}
+
+.inactive-tab:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-1px);
+}
+
+.tab-content {
     display: none;
 }
 
-.process-scroll {
-    scrollbar-width: thin;
-    scrollbar-color: #8668de transparent;
+.tab-content.active {
+    display: block;
+    animation: fadeIn 0.4s ease-out forwards;
 }
 
-.process-scroll::-webkit-scrollbar {
-    height: 6px;
-}
+/* ===== SCROLLBARS ===== */
 
-.process-scroll::-webkit-scrollbar-track {
-    background: #f1f5f9;
-    border-radius: 10px;
+::-webkit-scrollbar {
+    width: 6px;
 }
-
-.process-scroll::-webkit-scrollbar-thumb {
-    background-color: #8668de;
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+    background: #e2e8f0;
     border-radius: 10px;
 }
 
 .custom-scrollbar {
     scrollbar-width: thin;
-    scrollbar-color: #8668de #f1f5f9;
+    scrollbar-color: var(--accent) var(--bg-light);
 }
 
 .custom-scrollbar::-webkit-scrollbar {
-    height: 8px;
+    height: 6px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-track {
-    background: #f1f5f9;
+    background: var(--bg-light);
     border-radius: 20px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: #8668de;
+    background: var(--accent);
     border-radius: 20px;
 }
 
-.custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: #6d4fc2;
+/* ===== ANIMATIONS ===== */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-/* ===== MOBILE FIXES ===== */
+/* ===== RESPONSIVE FIXES ===== */
 
-@media (min-width: 768px) and (max-width: 1024px) {
-    html {
-        font-size: 18px;
+@media (max-width: 768px) {
+    .hero-gradient {
+        background: #ffffff;
     }
 }
 
 @media (min-width: 768px) {
     p {
-        line-height: 1.6 !important;
+        line-height: 1.6;
     }
+}
 
-    .mobile-link {
-        font-size: 1.1rem;
+/* Фикс дерганья: Контейнер для вкладок */
+.tabs-container {
+    position: relative;
+    min-height: 600px;
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.tab-content {
+    grid-column: 1;
+    grid-row: 1;
+    display: none;
+    opacity: 0;
+}
+
+.tab-content.active {
+    display: block;
+    animation: fadeInTab 0.3s ease-out forwards;
+}
+
+@keyframes fadeInTab {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.process-scroll {
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+}
+
+@media (max-width: 768px) {
+    .tabs-container {
+        min-height: auto;
     }
 }
